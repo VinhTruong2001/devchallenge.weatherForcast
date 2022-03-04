@@ -12,6 +12,14 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
+
+  .scroll-in {
+    @apply translate-x-0 transition-transform;
+  }
+
+  .scroll-out {
+    @apply -translate-x-full transition-transform;
+  }
 }
 
 * {

@@ -2,18 +2,24 @@ import React from 'react';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-function SideBar() {
+function SideBar({toggleLocation}) {
   return (
-    <div className="p-[18px_11px_50px] lg:p-[42px_46px] h-[810px] lg:h-full relative">
+    <div className="bg-primary-color p-[18px_11px_50px] lg:p-[42px_46px] h-[810px] lg:h-full relative">
         <div className="absolute h-[400px] top-14 lg:top-24 left-[-120px] right-[-120px] bg-default bg-clouds z-10"></div>
 
         <div className="relative h-full z-20 flex flex-col justify-between items-center">
             {/*Search location buttons */}
             <div className="w-full flex justify-between">
-                <div className="w-[160px] h-[40px] flex-center shadow-btn bg-gray-500 cursor-pointer">
+                <div
+                    onClick={toggleLocation}
+                    className="w-[160px] h-[40px] flex-center shadow-btn bg-gray-500 cursor-pointer"
+                >
                     <span>Search for places</span>
                 </div>
-                <div className="w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer">
+                <div
+                    onClick={toggleLocation}
+                    className="w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer"
+                >
                     <MyLocationIcon />
                 </div>
             </div>
