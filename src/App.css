@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap");
+
+@layer components {
+  .bg-default {
+    @apply bg-no-repeat bg-contain;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+}
 
 * {
   padding: 0;
@@ -11,8 +21,8 @@
 }
 
 body {
-  color: #fff;
-  font-family: "Roboto", sans-serif;
+  color: #e7e7eb;
+  font-family: "Raleway", sans-serif;
   line-height: 1.5;
 }
 
