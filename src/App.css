@@ -43,3 +43,39 @@ ul,
 li {
   list-style: none;
 }
+
+.clear {
+  background-image: url("./assets/Clear.png");
+}
+
+.hail {
+  background-image: url("./assets/Hail.png");
+}
+
+.heavycloud {
+  background-image: url("./assets/HeavyCloud.png");
+}
+
+.lightcloud {
+  background-image: url("./assets/LightCloud.png");
+}
+
+.lightrain {
+  background-image: url("./assets/LightRain.png");
+}
+
+.showers {
+  background-image: url("./assets/Shower.png");
+}
+
+.sleet {
+  background-image: url("./assets/Sleet.png");
+}
+
+.snow {
+  background-image: url("./assets/Snow.png");
+}
+
+.thunderstorm {
+  background-image: url("./assets/Thunderstorm.png");
+}

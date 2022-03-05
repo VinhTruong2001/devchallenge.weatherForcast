@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import callApi from '../utils/callApi';
 
-function LocationSearch({ isToggleLocation, toggleLocation}) {
+function LocationSearch({ isToggleLocation, toggleLocation, setWoeid }) {
     const searchRef = useRef();
     const [results, setResults] = useState([]);
 
@@ -16,6 +16,12 @@ function LocationSearch({ isToggleLocation, toggleLocation}) {
     const clearSearch = () => {
         searchRef.current.value = '';
         setResults([]);
+    }
+
+    const changeCity = (woeid) => {
+        setWoeid(woeid);
+        toggleLocation();
+        clearSearch();
     }
 
     return (
@@ -67,6 +73,7 @@ function LocationSearch({ isToggleLocation, toggleLocation}) {
                             <li
                                 className="my-4 text-xl cursor-pointer font-[600] hover:text-[#FEEC64]"
                                 key={index}
+                                onClick={() => changeCity(city.woeid)}
                             >
                                 {city.title}
                             </li>
