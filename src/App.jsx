@@ -5,9 +5,10 @@ import LocationSearch from './components/LocationSearch';
 import callApi from './utils/callApi';
 import Schedule from './components/Schedule';
 import TodayReports from './components/TodayReports';
-import { getCurrentLocation } from './utils/methods';
+import { getCurrentLocation } from './utils/methods'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [isToggleLocation, setIsToggleLocation] = useState(false);
   const [woeid, setWoeid] = useState(1252431);
   const [weatherData, setWeatherData] = useState(null);
@@ -16,24 +17,32 @@ function App() {
   useEffect(() => {
     if (!getCurrentLocation(getPosition)) {
       callApi('GET', null, woeid).then((res) => {
-        console.log(res.data);
         setWeatherData(res.data);
+        closeLoadingOverlay();
       })
     }
   }, [woeid])
 
   const getPosition = (position) => {
-    setCurrentLocation(`${position.coords.latitude},${position.coords.longitude}`)
+    setCurrentLocation(`${position.coords.latitude},${position.coords.longitude}`);
+    closeLoadingOverlay();
   }
 
   const setCurrentLocation = (location) => {
+    setIsLoading(true);
     callApi('GET', null, `search/?lattlong=${location}`).then((queryRes) => {
       callApi('GET', null, queryRes.data[0].woeid).then((res) => {
         setWeatherData(res.data);
+        closeLoadingOverlay();
       })
     })
   }
 
+  const closeLoadingOverlay = () => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }
 
   return (
     <div className="App">
@@ -44,6 +53,7 @@ function App() {
             toggleLocation={() => setIsToggleLocation(true)}
             setCurrentLocation={(location) => setCurrentLocation(location)}
             degreeUnit={degreeUnit}
+            isLoading={isLoading}
           />
           <LocationSearch
             toggleLocation={() => setIsToggleLocation(false)}
@@ -72,10 +82,12 @@ function App() {
             <Schedule
               weatherData={weatherData?.consolidated_weather.slice(1) || []}
               degreeUnit={degreeUnit}
+              isLoading={isLoading}
             />
 
             <TodayReports
               weatherData={weatherData?.consolidated_weather[0] || []}
+              isLoading={isLoading}
             />
           </div>
 

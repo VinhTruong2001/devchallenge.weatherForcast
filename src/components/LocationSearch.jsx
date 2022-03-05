@@ -2,14 +2,18 @@ import React, { useRef, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import callApi from '../utils/callApi';
+import LoadingOverlay from './LoadingOverlay';
 
 function LocationSearch({ isToggleLocation, toggleLocation, setWoeid }) {
     const searchRef = useRef();
     const [results, setResults] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
 
     const searchLocation = () => {
+        setIsSearching(true);
         callApi('GET', null, `search/?query=${searchRef.current.value}`).then((res) => {
             setResults(res.data);
+            setIsSearching(false);
         })
     }
 
@@ -57,7 +61,7 @@ function LocationSearch({ isToggleLocation, toggleLocation, setWoeid }) {
             </div>
 
             {/* Result */}
-            <div className="max-h-full mt-9 lg:mt-14">
+            <div className="h-full max-h-[665px] mt-9 lg:mt-14">
                 <div className="flex justify-between">
                     <h4 className="font-bold">Results ({results.length})</h4>
                     <span
@@ -67,8 +71,9 @@ function LocationSearch({ isToggleLocation, toggleLocation, setWoeid }) {
                         clear
                     </span>
                 </div>
-                <ul className="pl-2 pt-2 overflow-y-auto max-h-full">
+                <ul className="pl-2 pt-2 overflow-y-auto min-h-full max-h-full relative mt-3">
                     {
+                        isSearching ? <LoadingOverlay /> :
                         results?.map((city, index) =>
                             <li
                                 className="my-4 text-xl cursor-pointer font-[600] hover:text-[#FEEC64]"
