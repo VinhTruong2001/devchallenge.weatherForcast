@@ -3,7 +3,7 @@ import ScheduleItem from './ScheduleItem';
 
 function Schedule({ weatherData, degreeUnit }) {
   return (
-    <div className="pt-[40px] lg:p-[66px_0_72px] grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-12">
+    <div className="py-[40px] lg:p-[30px_0] grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-3 lg:gap-12">
         {
             weatherData?.map((data, index) =>
                 <ScheduleItem

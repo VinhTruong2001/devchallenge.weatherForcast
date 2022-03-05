@@ -3,7 +3,7 @@ import { getWeatherIcon, getTemperature, getDateFormat } from '../utils/methods'
 
 function ScheduleItem({ weatherData, index, degreeUnit }) {
     return (
-        <div className="h-[220px] bg-primary-color p-[18px_22px] text-[16px] flex flex-col">
+        <div className="w-[140px] h-[200px] bg-primary-color p-[18px_22px] text-[16px] flex flex-col">
             <div className="text-center">
                 {
                     index === 0 ?
@@ -11,7 +11,7 @@ function ScheduleItem({ weatherData, index, degreeUnit }) {
                         getDateFormat(null, index)
                 }
             </div>
-            <div className={`w-full m-auto flex-1 bg-default bg-[length:90px] bg-[center_top] ${getWeatherIcon(weatherData?.weather_state_name)}`}></div>
+            <div className={`w-full m-auto flex-1 bg-default bg-[center_top] ${getWeatherIcon(weatherData?.weather_state_name)}`}></div>
             <div className="flex justify-between">
                 <span>
                     {

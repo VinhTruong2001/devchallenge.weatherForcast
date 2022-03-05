@@ -4,6 +4,7 @@ import SideBar from './components/SideBar';
 import LocationSearch from './components/LocationSearch';
 import callApi from './utils/callApi';
 import Schedule from './components/Schedule';
+import TodayReports from './components/TodayReports';
 
 function App() {
   const [isToggleLocation, setIsToggleLocation] = useState(false);
@@ -23,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <div className="flex flex-col lg:flex-row min-h-screen">
-        <div className="lg:flex-1-3 overflow-hidden relative">
+        <div className="lg:flex-2-5 overflow-hidden relative">
           <SideBar
             weatherData={weatherData}
             toggleLocation={() => setIsToggleLocation(true)}
@@ -36,25 +37,44 @@ function App() {
           />
         </div>
 
-        <div className="lg:flex-2-3 bg-secondary-color p-[52px_30px_25px] lg:p-[42px_123px_25px_154px]">
+        <div className="lg:flex-3-5 flex flex-col justify-between bg-secondary-color p-[52px_30px_25px] md:px-[10px] lg:p-[42px_123px_25px_154px]">
           <div className="flex justify-end">
             <div
               onClick={() => setDegreeUnit(0)}
-              className={`w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer mr-3 font-bold ${degreeUnit === 0 && 'text-secondary-color bg-white'}`}
+              className={`circle-btn ${degreeUnit === 0 && 'text-secondary-color bg-white'}`}
             >
                 &#8451;
             </div>
             <div
               onClick={() => setDegreeUnit(1)}
-              className={`w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer font-bold ${degreeUnit === 1 && 'text-secondary-color bg-white'}`}
+              className={`circle-btn ${degreeUnit === 1 && 'text-secondary-color bg-white'}`}
             >
                 &#8457;
             </div>
           </div>
-          <Schedule
-            weatherData={weatherData?.consolidated_weather.slice(1) || []}
-            degreeUnit={degreeUnit}
-          />
+
+          <div className="flex-1">
+            <Schedule
+              weatherData={weatherData?.consolidated_weather.slice(1) || []}
+              degreeUnit={degreeUnit}
+            />
+
+            <TodayReports
+              weatherData={weatherData?.consolidated_weather[0] || []}
+            />
+          </div>
+
+          <footer className="text-sm m-auto mt-[30px]">
+            created by&#160;
+            <a
+              href="https://github.com/VinhTruong2001"
+              className="underline"
+              target="_blank"
+            >
+              VinhTruong2001
+            </a>
+            - devChallenges.io
+          </footer>
         </div>
       </div>
     </div>

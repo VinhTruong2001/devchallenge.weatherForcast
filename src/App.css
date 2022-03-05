@@ -20,6 +20,10 @@
   .scroll-out {
     @apply -translate-x-full transition-transform;
   }
+
+  .circle-btn {
+    @apply w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer mr-3 font-bold;
+  }
 }
 
 * {
@@ -44,6 +48,19 @@ li {
   list-style: none;
 }
 
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: #ffec65;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #e7e7eb;
+}
+
 .clear {
   background-image: url("./assets/Clear.png");
 }
@@ -62,6 +79,10 @@ li {
 
 .lightrain {
   background-image: url("./assets/LightRain.png");
+}
+
+.heavyrain {
+  background-image: url("./assets/HeavyRain.png");
 }
 
 .showers {

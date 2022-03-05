@@ -6,7 +6,7 @@ import { getWeatherIcon, getTemperature, getDateFormat } from '../utils/methods'
 function SideBar({ toggleLocation, weatherData, degreeUnit }) {
     return (
         <div className="bg-primary-color p-[18px_11px_50px] lg:p-[42px_46px] h-[810px] lg:h-full relative">
-            <div className="absolute h-[400px] top-14 lg:top-24 left-[-120px] right-[-120px] bg-default bg-clouds z-10"></div>
+            <div className="absolute w-full h-[400px] top-14 left-0 lg:top-24 bg-default bg-clouds bg-center bg-[length:150%] md:bg-[length:150%_100%] z-10"></div>
 
             <div className="relative h-full z-20 flex flex-col justify-between items-center">
                 {/*Search location buttons */}
@@ -19,7 +19,7 @@ function SideBar({ toggleLocation, weatherData, degreeUnit }) {
                     </div>
                     <div
                         onClick={toggleLocation}
-                        className="w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer"
+                        className="circle-btn"
                     >
                         <MyLocationIcon />
                     </div>
