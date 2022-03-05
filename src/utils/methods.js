@@ -11,7 +11,7 @@ export const getTemperature = (temperature = 0, degreeUnit = 0) => {
 
 export const getDateFormat = (time, index = 0) => {
     let today = time ? new Date(time) : new Date();
-    if (index != 0) {
+    if (index !== 0) {
         today.setDate(today.getDate() + index);
     }
     const dateFormated = today.toString().split(' ');
