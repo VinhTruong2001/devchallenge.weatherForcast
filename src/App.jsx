@@ -15,13 +15,17 @@ function App() {
   const [degreeUnit, setDegreeUnit] = useState(0);
 
   useEffect(() => {
-    if (!getCurrentLocation(getPosition)) {
-      callApi('GET', null, woeid).then((res) => {
-        setWeatherData(res.data);
-        closeLoadingOverlay();
-      })
+    if (!getCurrentLocation(getPosition, getMyPosition)) {
+      getMyPosition();
     }
   }, [woeid])
+
+  const getMyPosition = () => {
+    callApi('GET', null, woeid).then((res) => {
+      setWeatherData(res.data);
+      closeLoadingOverlay();
+    })
+  }
 
   const getPosition = (position) => {
     setCurrentLocation(`${position.coords.latitude},${position.coords.longitude}`);

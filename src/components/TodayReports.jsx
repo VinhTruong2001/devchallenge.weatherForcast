@@ -4,7 +4,7 @@ import TodayReportsItem from './TodayReportsItem';
 
 function TodayReports({ weatherData, isLoading }) {
   return (
-    <div class="relative min-h-[478px]">
+    <div className="relative min-h-[478px]">
       <h2 className="text-[30px] lg:text-[40px] font-bold">Today's Hightlights</h2>
       {
         isLoading ? <LoadingOverlay /> :

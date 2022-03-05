@@ -18,9 +18,9 @@ export const getDateFormat = (time, index = 0) => {
     return `${dateFormated[0]}, ${dateFormated[2]} ${dateFormated[1]}`;
 }
 
-export const getCurrentLocation = (callBack) => {
+export const getCurrentLocation = (callBack, errorCallback = null) => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(callBack)
+        navigator.geolocation.getCurrentPosition(callBack, errorCallback);
         return true;
     } else {
         console.log("Geolocation is not supported by this browser.");
