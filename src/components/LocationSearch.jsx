@@ -50,6 +50,7 @@ function LocationSearch({ isToggleLocation, toggleLocation, setWoeid }) {
                         name="location"
                         placeholder='Search location'
                         className="outline-none bg-transparent ml-4 flex-1"
+                        onKeyDown={(e) => {e.keyCode === 13 && searchLocation()}}
                     />
                 </div>
                 <div

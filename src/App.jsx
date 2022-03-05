@@ -19,7 +19,7 @@ function App() {
     if (!getCurrentLocation(getPosition, getMyPosition)) {
       getMyPosition();
     }
-  }, [])
+  }, [woeid])
 
   const enableCORSAnywhere = () => {
     var cors_api_host = 'cors-anywhere.herokuapp.com';
