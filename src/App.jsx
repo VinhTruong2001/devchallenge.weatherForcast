@@ -8,6 +8,7 @@ function App() {
   const [isToggleLocation, setIsToggleLocation] = useState(false);
   const [woeid, setWoeid] = useState(1252431);
   const [weatherData, setWeatherData] = useState(null);
+  const [degreeUnit, setDegreeUnit] = useState(0)
 
   useEffect(() => {
     callApi('GET', null, woeid).then((res) => {
@@ -16,6 +17,8 @@ function App() {
     })
   }, [woeid])
 
+
+
   return (
     <div className="App">
       <div className="flex flex-col lg:flex-row min-h-screen">
@@ -23,6 +26,7 @@ function App() {
           <SideBar
             weatherData={weatherData}
             toggleLocation={() => setIsToggleLocation(true)}
+            degreeUnit={degreeUnit}
           />
           <LocationSearch
             toggleLocation={() => setIsToggleLocation(false)}
@@ -31,8 +35,21 @@ function App() {
           />
         </div>
 
-        <div className="lg:flex-2-3 bg-secondary-color">
-
+        <div className="lg:flex-2-3 bg-secondary-color p-[52px_54px_25px] lg:p-[42px_123px_25px_154px]">
+          <div className="flex justify-end">
+            <div
+              onClick={() => setDegreeUnit(0)}
+              className={`w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer mr-3 font-bold ${degreeUnit === 0 && 'text-secondary-color bg-white'}`}
+            >
+                &#8451;
+            </div>
+            <div
+              onClick={() => setDegreeUnit(1)}
+              className={`w-10 h-10 flex-center shadow-btn rounded-full bg-gray-500 cursor-pointer font-bold ${degreeUnit === 1 && 'text-secondary-color bg-white'}`}
+            >
+                &#8457;
+            </div>
+          </div>
         </div>
       </div>
     </div>

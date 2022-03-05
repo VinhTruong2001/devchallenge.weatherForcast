@@ -2,7 +2,7 @@ import React from 'react';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-function SideBar({ toggleLocation, weatherData }) {
+function SideBar({ toggleLocation, weatherData, degreeUnit }) {
 
     const getWeatherIcon = () => {
         getDateFormat();
@@ -12,7 +12,10 @@ function SideBar({ toggleLocation, weatherData }) {
     }
 
     const getTemperature = () => {
-        return Math.round(weatherData?.consolidated_weather[0].the_temp || 0)
+        let temperature = weatherData?.consolidated_weather[0].the_temp || 0
+        if (degreeUnit === 0)
+            return Math.round(temperature);
+        return Math.round(temperature*1.8 + 32)
     }
 
     const getDateFormat = () => {
@@ -53,7 +56,9 @@ function SideBar({ toggleLocation, weatherData }) {
                 {/* Temperature */}
                 <div className="flex-center items-end">
                     <span className="text-[144px] leading-none">{ getTemperature() }</span>
-                    <span className="text-[48px] text-[#A09FB1]">&#8451;</span>
+                    <span className="text-[48px] text-[#A09FB1]">
+                        {degreeUnit ? '\u2109' : '\u2103'}
+                    </span>
                 </div>
 
                 {/* Weather status */}
