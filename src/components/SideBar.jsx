@@ -1,29 +1,9 @@
 import React from 'react';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { getWeatherIcon, getTemperature, getDateFormat } from '../utils/methods'
 
 function SideBar({ toggleLocation, weatherData, degreeUnit }) {
-
-    const getWeatherIcon = () => {
-        getDateFormat();
-        return weatherData?.consolidated_weather[0].weather_state_name
-                .toLowerCase()
-                .replace(' ', '');
-    }
-
-    const getTemperature = () => {
-        let temperature = weatherData?.consolidated_weather[0].the_temp || 0
-        if (degreeUnit === 0)
-            return Math.round(temperature);
-        return Math.round(temperature*1.8 + 32)
-    }
-
-    const getDateFormat = () => {
-        const today = new Date(weatherData?.time);
-        const dateFormated = today.toString().split(' ');
-        return `${dateFormated[0]} ${dateFormated[2]} ${dateFormated[1]}`;
-    }
-
     return (
         <div className="bg-primary-color p-[18px_11px_50px] lg:p-[42px_46px] h-[810px] lg:h-full relative">
             <div className="absolute h-[400px] top-14 lg:top-24 left-[-120px] right-[-120px] bg-default bg-clouds z-10"></div>
@@ -48,14 +28,14 @@ function SideBar({ toggleLocation, weatherData, degreeUnit }) {
                 {/* Weather status img */}
                 <div className="flex-center">
                     <div
-                        className={`w-[150px] h-[174px] lg:w-[202px] lg:h-[234px] bg-default ${ getWeatherIcon() }`}
+                        className={`w-[150px] h-[174px] lg:w-[202px] lg:h-[234px] bg-default ${ getWeatherIcon(weatherData?.consolidated_weather[0].weather_state_name) }`}
                     >
                     </div>
                 </div>
 
                 {/* Temperature */}
                 <div className="flex-center items-end">
-                    <span className="text-[144px] leading-none">{ getTemperature() }</span>
+                    <span className="text-[144px] leading-none">{ getTemperature(weatherData?.consolidated_weather[0].the_temp, degreeUnit) }</span>
                     <span className="text-[48px] text-[#A09FB1]">
                         {degreeUnit ? '\u2109' : '\u2103'}
                     </span>
@@ -71,7 +51,7 @@ function SideBar({ toggleLocation, weatherData, degreeUnit }) {
                     <div className="mb-8">
                         <span>Today</span>
                         <span className="mx-4">•</span>
-                        <span>{getDateFormat()}</span>
+                        <span>{getDateFormat(weatherData?.time)}</span>
                     </div>
 
                     <div className="flex-center">

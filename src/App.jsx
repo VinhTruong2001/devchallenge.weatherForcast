@@ -3,6 +3,7 @@ import './App.css';
 import SideBar from './components/SideBar';
 import LocationSearch from './components/LocationSearch';
 import callApi from './utils/callApi';
+import Schedule from './components/Schedule';
 
 function App() {
   const [isToggleLocation, setIsToggleLocation] = useState(false);
@@ -35,7 +36,7 @@ function App() {
           />
         </div>
 
-        <div className="lg:flex-2-3 bg-secondary-color p-[52px_54px_25px] lg:p-[42px_123px_25px_154px]">
+        <div className="lg:flex-2-3 bg-secondary-color p-[52px_30px_25px] lg:p-[42px_123px_25px_154px]">
           <div className="flex justify-end">
             <div
               onClick={() => setDegreeUnit(0)}
@@ -50,6 +51,10 @@ function App() {
                 &#8457;
             </div>
           </div>
+          <Schedule
+            weatherData={weatherData?.consolidated_weather.slice(1) || []}
+            degreeUnit={degreeUnit}
+          />
         </div>
       </div>
     </div>
