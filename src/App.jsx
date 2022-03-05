@@ -5,29 +5,44 @@ import LocationSearch from './components/LocationSearch';
 import callApi from './utils/callApi';
 import Schedule from './components/Schedule';
 import TodayReports from './components/TodayReports';
+import { getCurrentLocation } from './utils/methods';
 
 function App() {
   const [isToggleLocation, setIsToggleLocation] = useState(false);
   const [woeid, setWoeid] = useState(1252431);
   const [weatherData, setWeatherData] = useState(null);
-  const [degreeUnit, setDegreeUnit] = useState(0)
+  const [degreeUnit, setDegreeUnit] = useState(0);
 
   useEffect(() => {
-    callApi('GET', null, woeid).then((res) => {
-      console.log(res.data);
-      setWeatherData(res.data);
-    })
+    if (!getCurrentLocation(getPosition)) {
+      callApi('GET', null, woeid).then((res) => {
+        console.log(res.data);
+        setWeatherData(res.data);
+      })
+    }
   }, [woeid])
 
+  const getPosition = (position) => {
+    setCurrentLocation(`${position.coords.latitude},${position.coords.longitude}`)
+  }
+
+  const setCurrentLocation = (location) => {
+    callApi('GET', null, `search/?lattlong=${location}`).then((queryRes) => {
+      callApi('GET', null, queryRes.data[0].woeid).then((res) => {
+        setWeatherData(res.data);
+      })
+    })
+  }
 
 
   return (
     <div className="App">
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="flex flex-col lg:flex-row min-h-screen relative">
         <div className="lg:flex-2-5 overflow-hidden relative">
           <SideBar
             weatherData={weatherData}
             toggleLocation={() => setIsToggleLocation(true)}
+            setCurrentLocation={(location) => setCurrentLocation(location)}
             degreeUnit={degreeUnit}
           />
           <LocationSearch

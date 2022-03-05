@@ -1,9 +1,14 @@
 import React from 'react';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { getWeatherIcon, getTemperature, getDateFormat } from '../utils/methods'
+import { getWeatherIcon, getTemperature, getDateFormat, getCurrentLocation } from '../utils/methods'
 
-function SideBar({ toggleLocation, weatherData, degreeUnit }) {
+function SideBar({ toggleLocation, weatherData, degreeUnit, setCurrentLocation }) {
+
+    const getPosition = (position) => {
+        setCurrentLocation(`${position.coords.latitude},${position.coords.longitude}`)
+    }
+
     return (
         <div className="bg-primary-color p-[18px_11px_50px] lg:p-[42px_46px] h-[810px] lg:h-full relative">
             <div className="absolute w-full h-[400px] top-14 left-0 lg:top-24 bg-default bg-clouds bg-center bg-[length:150%] md:bg-[length:150%_100%] z-10"></div>
@@ -18,7 +23,7 @@ function SideBar({ toggleLocation, weatherData, degreeUnit }) {
                         <span>Search for places</span>
                     </div>
                     <div
-                        onClick={toggleLocation}
+                        onClick={() => getCurrentLocation(getPosition)}
                         className="circle-btn"
                     >
                         <MyLocationIcon />

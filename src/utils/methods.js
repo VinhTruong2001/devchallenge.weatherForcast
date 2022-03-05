@@ -17,3 +17,13 @@ export const getDateFormat = (time, index = 0) => {
     const dateFormated = today.toString().split(' ');
     return `${dateFormated[0]}, ${dateFormated[2]} ${dateFormated[1]}`;
 }
+
+export const getCurrentLocation = (callBack) => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(callBack)
+        return true;
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+        return false;
+    }
+}
