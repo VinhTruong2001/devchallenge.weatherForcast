@@ -22,8 +22,8 @@ function App() {
   }, [woeid])
 
   const enableCORSAnywhere = () => {
-    var cors_api_host = 'cors-anywhere.herokuapp.com';
-    var cors_api_url = 'https://' + cors_api_host + '/';
+    var cors_api_host = 'sunt-cors-anywhere.herokuapp';
+    var cors_api_url = 'https://' + cors_api_host + '.com/';
     var slice = [].slice;
     var origin = window.location.protocol + '//' + window.location.host;
     var open = XMLHttpRequest.prototype.open;
@@ -41,6 +41,9 @@ function App() {
   const getMyPosition = () => {
     callApi('GET', null, woeid).then((res) => {
       setWeatherData(res.data);
+      closeLoadingOverlay();
+    }).cacth((error) => {
+      console.log(error);
       closeLoadingOverlay();
     })
   }
@@ -63,7 +66,7 @@ function App() {
   const closeLoadingOverlay = () => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2000);
   }
 
   return (
